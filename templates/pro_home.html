@@ -1,0 +1,24 @@
+{% extends "home.html" %}
+{% block jobs %}
+<h3>Pending Jobs</h3>
+<table>
+    <tr>
+        <th>Client</th>
+        <th>Field</th>
+        <th>Job</th>
+        <th>Status</th>
+        <th>Meet Time</th>
+    </tr>
+    {% for req in requests %}
+        <tr>
+            <td>{{req.pro}}</td>
+            <td>{{req.field}}</td>
+            <td>{{req.job}}</td>
+            <td>{{req.status}}</td>
+            <td>{{req.atime}}</td>
+        </tr>
+    {% endfor %}
+</table>
+<br>
+<br>
+{% endblock %}

@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, session, redirect, url_for, flash
 from datetime import timedelta
 from flask_sqlalchemy import SQLAlchemy
+import datetime
 
 # Flask and SQLAlchemy code
 app = Flask(__name__)
@@ -12,6 +13,8 @@ app.config['SQLALCHEMY_BINDS'] = {'requests' : 'sqlite:///requests.sqlite3',
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
+
+dt = '%Y-%m-%d %H:%M:%S'
 
 class users(db.Model):
     user = db.Column(db.String(100), primary_key=True)
@@ -33,6 +36,46 @@ class users(db.Model):
         self.latt = -360
         self.long = -360
 
+class pros(db.Model):
+    user = db.Column(db.String(100), primary_key=True)
+    first = db.Column(db.String(100))
+    last = db.Column(db.String(100))
+    address = db.Column(db.String(100))
+    latt = db.Column(db.Numeric(10,7))
+    long = db.Column(db.Numeric(10,7))
+    field = db.Column(db.String(100), primary_key=True)
+    job = db.Column(db.String(100), primary_key=True)
+
+    def __init__(self, user, first, last, latt, long, field, job):
+        self.user = user
+        self.first = first
+        self.last = last
+        self.latt = latt
+        self.long = long
+        self.field = field
+        self.job = job
+
+class requests(db.Model):
+    client = db.Column(db.String(100))
+    pro = db.Column(db.String(100))
+    field = field = db.Column(db.String(100))
+    job = db.Column(db.String(100))
+    details = db.Column(db.String(1000))
+    status = db.Column(db.String(10))
+    dtime = db.Column(db.DateTime(), primary_key=True)
+    atime = db.Column(db.String(25))
+
+    def __init__(self, client, pro, field, job, details, status, atime):
+        self.client = client
+        self.pro = pro
+        self.field = field
+        self.job = job
+        self.details = details
+        self.status = status
+        self.dtime = (datetime.datetime.now()).strftime(dt)
+        self.atime = atime
+
+
 @app.route('/', methods=['GET', 'POST'])
 def main():
     if "user" in session:
@@ -46,7 +89,13 @@ def main():
             flash("An error has occurred. Please login again")
             return redirect(url_for("login"))
         arr = [foundUser.first, foundUser.last]
-        return render_template("home.html", arr = arr)
+        allReqs = requests.query.filter_by(client=session["user"].lower()).order_by(requests.dtime.desc())
+        foundPro = pros.query.filter_by(user=session["user"].lower()).first()
+        if foundPro:
+            allJobs = requests.query.filter_by(pro=session["user"].lower(), accept="Pending").order_by(requests.dtime.desc())
+            return render_template("pro_home.html", arr = arr, requests = allReqs, jobs = allJobs)
+
+        return render_template("home.html", arr = arr, requests = allReqs)
 
     else:
         if request.method == 'POST':
