@@ -16,3 +16,5 @@ Have a Page to Search
 
 Have a Special Page to Provide Therapy
 - Have to Geolocate Yourself, Provide Your Niche, Make a Small Blurb
+
+Using classes might not work, maybe switch to lists for home, requests, and f_request
