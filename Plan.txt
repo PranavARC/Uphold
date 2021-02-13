@@ -1,0 +1,18 @@
+Create a Create Account Page
+- user, password, first, last, age, gender
+
+Create a Login Page
+- user, password
+
+Create a User Home Page
+- Allow them to look for professionals for a particular service
+- Check if their requests have been accepted
+- Check if they themselves have received requests as therapists
+- Allow them to spec into therapists
+
+Have a Page to Search
+- Have to Geolocate Yourself, set a mile distance restriction, find a person
+- Send a request if needed
+
+Have a Special Page to Provide Therapy
+- Have to Geolocate Yourself, Provide Your Niche, Make a Small Blurb
