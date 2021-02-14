@@ -1,11 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>{{pro.first}} {{pro.last}}</h1>
-{{pro.address}}
+<h2>{{pro.first}} {{pro.last}}</h2>
+Address: </Address>{{pro.address}}
+<br>
 <br>
 <form action="" method="POST">
 Details:<br>
 <textarea name=details rows=10 cols=50 placeholder="Enter details here..."></textarea>
+<br>
 <br>
 Appointment Time:<br>
 <input type="datetime-local" id="apptime" name="apptime">

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Available Professionals</h1>
+<h2>Available Professionals</h2>
 {% for i in range(profs | length) %}
 <a href="{{url_for('f_requester', field=fd, job=jb, pro = profs[i].user)}}">{{profs[i].first}} {{profs[i].last}}</a> - {{dists[i]}} miles<br>
 {% endfor %}

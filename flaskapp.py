@@ -236,19 +236,7 @@ def requester(field, job, latt, long):
     for i in profs:
         dists.append(round(coordDist(float(latt), i.latt, float(long), i.long),1))
 
-    # if request.method == 'POST':
-    #     data = request.get_json()
-    #     userLatt = round((float(data['location']['lat'])), 6)
-    #     userLong = round((float(data['location']['lng'])), 6)
-        
-    #     profs.sort(key = lambda pr: coordDist(userLatt, pr.latt, userLong, pr.long))
-    #     print(profs[0].first)
-    #     return render_template("requests.html", fd = field, jb = job, profs=profs, len = len(profs))
-        
-    #     #profs.sort(key=coordDist(userLatt, latt, userLong, long))
-
     return render_template("requests.html", fd = field, jb = job, profs=profs, dists=dists)
-
 
 @app.route('/request/<field>-<job>/<pro>', methods=['GET', 'POST'])
 def f_requester(field, job, pro):
