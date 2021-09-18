@@ -1,6 +1,6 @@
 # Uphold
 Uphold is a platform that brings together individuals who need psychological and legal support of victims to racism, violence against and women, discrimination against LGBTQ+ individuals.  
-The project was made for the TreeHacks 2021 hacktathon.
+The project was made for the TreeHacks 2021 hackathon.
 
 ## Team Members and Roles:
 Pranav Charkupalli - Full-Stack Developer  
