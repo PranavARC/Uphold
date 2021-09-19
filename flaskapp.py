@@ -119,7 +119,6 @@ def main():
                 flash("You have logged out")
                 return redirect(url_for("main"))
             elif request.form.get("search"):
-                print("pog")
                 if(request.form["latt"] == ""):
                     flash("Please press the location button first")
                     return redirect(url_for("main"))
